@@ -2,13 +2,13 @@
 # see: https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG NEXUS_VERSION=latest
 
-FROM maven:3-jdk-8-alpine AS build
+FROM skaz5zzd.mirror.aliyuncs.com/maven:3-jdk-8-alpine AS build
 
 COPY . /nexus-repository-apk/
 RUN cd /nexus-repository-apk/; \
     mvn clean package -PbuildKar;
 
-FROM sonatype/nexus3:$NEXUS_VERSION
+FROM skaz5zzd.mirror.aliyuncs.com/sonatype/nexus3:$NEXUS_VERSION
 
 ARG FORMAT_VERSION=0.0.5-SNAPSHOT
 ARG DEPLOY_DIR=/opt/sonatype/nexus/deploy/
